@@ -13,6 +13,11 @@
           path = ./rust;
           description = "Rust development environment";
         };
+
+        typescript = {
+          path = ./typescript;
+          description = "TypeScript development environment";
+        };
       };
     };
 }
