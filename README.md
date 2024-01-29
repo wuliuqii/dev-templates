@@ -19,5 +19,6 @@ nix flake init --template github:wuliuqii/dev-templates#rust
 | Language   | Template                   |
 | ---------- | -------------------------- |
 | rust       | [rust](./rust)             |
+| gtk-rs     | [gtk-rs](./gtk-rs)         |
 | go         | [go](./go)                 |
 | typescript | [typescript](./typescript) |

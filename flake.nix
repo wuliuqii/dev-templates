@@ -14,6 +14,11 @@
           description = "Rust development environment";
         };
 
+        gtk-rs = {
+          path = ./gtk-rs;
+          description = "Gtk development evironment";
+        };
+
         typescript = {
           path = ./typescript;
           description = "TypeScript development environment";
