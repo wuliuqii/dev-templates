@@ -70,8 +70,6 @@
 
           buildInputs = [
             rustToolchain
-            rust-analyzer
-            cargo
             pkg-config
             openssl
 
