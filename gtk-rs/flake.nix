@@ -48,6 +48,10 @@
         });
     in
     {
+      packages = eachSystem ({ pkgs }: {
+        hello-gtk = pkgs.callPackage ./nix { };
+      });
+
       checks = eachSystem ({ pkgs }: {
         pre-commit-check = pre-commit-hooks.lib.${pkgs.system}.run {
           src = ./.;
@@ -63,14 +67,11 @@
           inherit (self.checks.${pkgs.system}.pre-commit-check) shellHook;
 
           nativeBuildInputs = [
-            clang
-            # Use mold when we are runnning in Linux
-            (lib.optionals stdenv.isLinux mold)
+            rustToolchain
+            pkg-config
           ];
 
           buildInputs = [
-            rustToolchain
-            pkg-config
             openssl
 
             gtk4
