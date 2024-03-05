@@ -35,10 +35,14 @@
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
       eachSystem = f:
         nixpkgs.lib.genAttrs supportedSystems (system: f {
-          pkgs = import nixpkgs { inherit overlays system; };
+          pkgs = import nixpkgs { inherit system overlays; };
         });
     in
     {
+      packages = eachSystem ({ pkgs }: {
+        hello-wayland = pkgs.callPackage ./nix { };
+      });
+
       checks = eachSystem ({ pkgs }: {
         pre-commit-check = pre-commit-hooks.lib.${pkgs.system}.run {
           src = ./.;
@@ -50,21 +54,24 @@
       });
 
       devShells = eachSystem ({ pkgs }: {
-        default = pkgs.mkShell (with pkgs; {
-          inherit (self.checks.${pkgs.system}.pre-commit-check) shellHook;
-
+        default = pkgs.mkShell (with pkgs; rec {
           nativeBuildInputs = [
-            clang
-            # Use mold when we are runnning in Linux
-            (lib.optionals stdenv.isLinux mold)
+            pkg-config
           ];
 
           buildInputs = [
             rustToolchain
-            pkg-config
-            openssl
+            wayland
+            systemd # For libudev
+            seatd # For libseat
+            libxkbcommon
+            libinput
+            mesa # For libgbm
+            pango
+            libglvnd # For libEGL
           ];
 
+          LD_LIBRARY_PATH = "${lib.makeLibraryPath buildInputs}";
           RUST_SRC_PATH = "${rustToolchain}/lib/rustlib/src/rust/library";
         });
       });

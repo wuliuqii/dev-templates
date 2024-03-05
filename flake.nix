@@ -19,6 +19,11 @@
           description = "Gtk development evironment";
         };
 
+        wayland-rs = {
+          path = ./wayland-rs;
+          description = "Wayland development evironment";
+        };
+
         typescript = {
           path = ./typescript;
           description = "TypeScript development environment";
