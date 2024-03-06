@@ -57,8 +57,12 @@
         default = pkgs.mkShell (with pkgs; {
           inherit (self.checks.${pkgs.system}.pre-commit-check) shellHook;
 
-          nativeBuildInputs = [
+          packages = [
             rustToolchain
+            rust-analyzer
+          ];
+
+          nativeBuildInputs = [
             pkg-config
           ];
 

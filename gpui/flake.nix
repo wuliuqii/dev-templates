@@ -35,12 +35,12 @@
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
       eachSystem = f:
         nixpkgs.lib.genAttrs supportedSystems (system: f {
-          pkgs = import nixpkgs { inherit system overlays; };
+          pkgs = import nixpkgs { inherit overlays system; };
         });
     in
     {
       packages = eachSystem ({ pkgs }: {
-        hello-wayland = pkgs.callPackage ./nix { };
+        hello-gpui = pkgs.callPackage ./nix { };
       });
 
       checks = eachSystem ({ pkgs }: {
@@ -63,19 +63,21 @@
           ];
 
           nativeBuildInputs = [
+            clang
+            # Use mold when we are runnning in Linux
+            (lib.optionals stdenv.isLinux mold)
+
             pkg-config
           ];
 
           buildInputs = [
-            rustToolchain
-            wayland
-            systemd # For libudev
-            seatd # For libseat
+            openssl
+            fontconfig
             libxkbcommon
-            libinput
-            mesa # For libgbm
-            pango
-            libglvnd # For libEGL
+            xorg.libxcb
+            wayland
+            vulkan-loader
+            freetype
           ];
 
           LD_LIBRARY_PATH = "${lib.makeLibraryPath buildInputs}";

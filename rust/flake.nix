@@ -57,15 +57,19 @@
         default = pkgs.mkShell (with pkgs; {
           inherit (self.checks.${pkgs.system}.pre-commit-check) shellHook;
 
+          packages = [
+            rustToolchain
+            rust-analyzer
+          ];
+
           nativeBuildInputs = [
             clang
             # Use mold when we are runnning in Linux
             (lib.optionals stdenv.isLinux mold)
+            pkg-config
           ];
 
           buildInputs = [
-            rustToolchain
-            pkg-config
             openssl
           ];
 

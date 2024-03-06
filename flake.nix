@@ -24,6 +24,11 @@
           description = "Wayland development evironment";
         };
 
+        gpui = {
+          path = ./gpui;
+          description = "Gpui development evironment";
+        };
+
         typescript = {
           path = ./typescript;
           description = "TypeScript development environment";

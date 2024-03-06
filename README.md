@@ -20,6 +20,7 @@ nix flake init --template github:wuliuqii/dev-templates#rust
 | ---------- | -------------------------- |
 | rust       | [rust](./rust)             |
 | gtk-rs     | [gtk-rs](./gtk-rs)         |
-| wayland-rs     | [wayland-rs](./wayland-rs)         |
+| wayland-rs | [wayland-rs](./wayland-rs) |
+| gpui       | [gpui](./gpui)             |
 | go         | [go](./go)                 |
 | typescript | [typescript](./typescript) |
