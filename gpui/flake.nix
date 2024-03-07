@@ -59,7 +59,6 @@
 
           packages = [
             rustToolchain
-            rust-analyzer
           ];
 
           nativeBuildInputs = [
