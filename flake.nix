@@ -14,6 +14,11 @@
           description = "Rust development environment";
         };
 
+        rust-project = {
+          path = ./rust-project;
+          description = "Rust project development environment";
+        };
+
         gtk-rs = {
           path = ./gtk-rs;
           description = "Gtk development evironment";

@@ -39,6 +39,10 @@
         });
     in
     {
+      packages = eachSystem ({ pkgs }: {
+        hello = pkgs.callPackage ./nix { };
+      });
+
       checks = eachSystem ({ pkgs }: {
         pre-commit-check = pre-commit-hooks.lib.${pkgs.system}.run {
           src = ./.;
