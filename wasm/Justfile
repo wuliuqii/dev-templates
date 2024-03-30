@@ -1,0 +1,10 @@
+default: build opt
+
+build:
+  wasm-pack build --release
+
+opt:
+  wasm-opt -Oz -o ./pkg/hello_bg_opt.wasm ./pkg/hello_bg.wasm
+
+run:
+  cargo run --release

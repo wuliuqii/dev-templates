@@ -14,6 +14,11 @@
           description = "Rust development environment";
         };
 
+        wasm = {
+          path = ./wasm;
+          description = "Rust wasm development environment";
+        };
+
         rust-project = {
           path = ./rust-project;
           description = "Rust project development environment";
