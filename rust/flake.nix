@@ -58,14 +58,9 @@
           ];
 
           nativeBuildInputs = [
-            clang
-            # Use mold when we are runnning in Linux
-            (lib.optionals stdenv.isLinux mold)
-            pkg-config
           ];
 
           buildInputs = [
-            openssl
           ];
 
           RUST_SRC_PATH = "${rustToolchain}/lib/rustlib/src/rust/library";

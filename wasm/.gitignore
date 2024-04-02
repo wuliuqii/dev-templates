@@ -15,4 +15,4 @@ target/
 .direnv
 result
 .pre-commit-config.yaml
-pkg
+wasm

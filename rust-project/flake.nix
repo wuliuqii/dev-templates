@@ -19,17 +19,7 @@
         rust-overlay.overlays.default
         (final: prev: {
           rustToolchain =
-            let
-              rust = prev.rust-bin;
-            in
-            if builtins.pathExists ./rust-toolchain.toml then
-              rust.fromRustupToolchainFile ./rust-toolchain.toml
-            else if builtins.pathExists ./rust-toolchain then
-              rust.fromRustupToolchainFile ./rust-toolchain
-            else
-              rust.selectLatestNightlyWith (toolchain: toolchain.default.override {
-                extensions = [ "rust-src" ];
-              });
+            prev.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
         })
       ];
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
@@ -62,14 +52,9 @@
           ];
 
           nativeBuildInputs = [
-            clang
-            # Use mold when we are runnning in Linux
-            (lib.optionals stdenv.isLinux mold)
-            pkg-config
           ];
 
           buildInputs = [
-            openssl
           ];
 
           RUST_SRC_PATH = "${rustToolchain}/lib/rustlib/src/rust/library";

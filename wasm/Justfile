@@ -1,10 +1,18 @@
-default: build opt run
+features := "+reference-types,+bulk-memory,+mutable-globals"
+out_dir := "./target/wasm32-unknown-unknown/wasm"
+dest_dir := "wasm"
+bin := "fibonacci"
 
 build:
-  wasm-pack build --release
-
-opt:
-  wasm-opt -Oz -o ./pkg/hello_bg_opt.wasm ./pkg/hello_bg.wasm
+  mkdir -p {{dest_dir}}
+  RUSTFLAGS="-C target-feature={{features}} -C panic=abort" cargo build --target wasm32-unknown-unknown --profile=wasm --example {{bin}}
+  cp "{{out_dir}}/{{bin}}.wasm" "{{dest_dir}}/"
+  wasm-opt "{{dest_dir}}/{{bin}}.wasm" -o "{{dest_dir}}/{{bin}}.wasm" -Oz --enable-bulk-memory --enable-multivalue --enable-reference-types --enable-mutable-globals
+  wasm2wat "{{dest_dir}}/{{bin}}.wasm" -o "{{dest_dir}}/{{bin}}.wat"
 
 run:
   cargo run --release
+
+clean:
+  rm -rf {{dest_dir}}
+  rm -rf target

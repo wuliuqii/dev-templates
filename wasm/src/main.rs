@@ -3,7 +3,7 @@ use wasmi::{Caller, Engine, Func, Linker, Store};
 
 fn main() -> Result<()> {
     let engine = Engine::default();
-    let wasm = include_bytes!("../pkg/hello_bg_opt.wasm");
+    let wasm = include_bytes!("../wasm/fibonacci_opt.wasm");
     let module = wasmi::Module::new(&engine, &wasm[..])?;
 
     let mut store = Store::new(&engine, 4);
@@ -13,9 +13,9 @@ fn main() -> Result<()> {
     });
 
     let mut linker = <Linker<u64>>::new(&engine);
-    linker.define("host", "fib", host_fib)?;
+    linker.define("host", "fibonacci", host_fib)?;
     let instance = linker.instantiate(&mut store, &module)?.start(&mut store)?;
-    let fib = instance.get_typed_func::<u64, u64>(&store, "fib")?;
+    let fib = instance.get_typed_func::<u64, u64>(&store, "fibonacci")?;
 
     let res = fib.call(&mut store, 40)?;
     println!("Result: {}", res);
