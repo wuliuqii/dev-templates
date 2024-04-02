@@ -6,7 +6,7 @@ bin := "fibonacci"
 build:
   mkdir -p {{dest_dir}}
   RUSTFLAGS="-C target-feature={{features}} -C panic=abort" cargo build --target wasm32-unknown-unknown --profile=wasm --example {{bin}}
-  cp "{{out_dir}}/{{bin}}.wasm" "{{dest_dir}}/"
+  cp "{{out_dir}}/examples/{{bin}}.wasm" "{{dest_dir}}/"
   wasm-opt "{{dest_dir}}/{{bin}}.wasm" -o "{{dest_dir}}/{{bin}}.wasm" -Oz --enable-bulk-memory --enable-multivalue --enable-reference-types --enable-mutable-globals
   wasm2wat "{{dest_dir}}/{{bin}}.wasm" -o "{{dest_dir}}/{{bin}}.wat"
 

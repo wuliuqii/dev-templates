@@ -3,7 +3,7 @@ use wasmi::{Caller, Engine, Func, Linker, Store};
 
 fn main() -> Result<()> {
     let engine = Engine::default();
-    let wasm = include_bytes!("../wasm/fibonacci_opt.wasm");
+    let wasm = include_bytes!("../wasm/fibonacci.wasm");
     let module = wasmi::Module::new(&engine, &wasm[..])?;
 
     let mut store = Store::new(&engine, 4);
