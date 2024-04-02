@@ -6,14 +6,9 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    pre-commit-hooks = {
-      url = "github:cachix/pre-commit-hooks.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, rust-overlay, pre-commit-hooks }:
+  outputs = { self, nixpkgs, rust-overlay }:
     let
       overlays = [
         rust-overlay.overlays.default
@@ -39,20 +34,8 @@
         });
     in
     {
-      checks = eachSystem ({ pkgs }: {
-        pre-commit-check = pre-commit-hooks.lib.${pkgs.system}.run {
-          src = ./.;
-          hooks = {
-            rustfmt.enable = true;
-            clippy.enable = true;
-          };
-        };
-      });
-
       devShells = eachSystem ({ pkgs }: {
         default = pkgs.mkShell (with pkgs; {
-          inherit (self.checks.${pkgs.system}.pre-commit-check) shellHook;
-
           packages = [
             rustToolchain
           ];
