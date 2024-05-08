@@ -48,6 +48,7 @@
             binaryen
             twiggy
             wabt
+            just
           ];
 
           nativeBuildInputs = [
