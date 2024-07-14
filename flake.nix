@@ -14,6 +14,11 @@
           description = "Rust development environment";
         };
 
+        bevy = {
+          path = ./bevy;
+          description = "Bevy development environment";
+        };
+
         wasm = {
           path = ./wasm;
           description = "Rust wasm development environment";

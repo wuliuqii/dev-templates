@@ -19,6 +19,7 @@ nix flake init --template github:wuliuqii/dev-templates#rust
 | Language   | Template                   |
 | ---------- | -------------------------- |
 | rust       | [rust](./rust)             |
+| bevy       | [bevy](./bevy)             |
 | gtk-rs     | [gtk-rs](./gtk-rs)         |
 | wayland-rs | [wayland-rs](./wayland-rs) |
 | gpui       | [gpui](./gpui)             |
