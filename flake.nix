@@ -1,7 +1,8 @@
 {
   description = "My personal nix flake dev templates";
 
-  outputs = { self }:
+  outputs =
+    { self }:
     {
       templates = {
         go = {
@@ -44,9 +45,9 @@
           description = "Gpui development evironment";
         };
 
-        typescript = {
-          path = ./typescript;
-          description = "TypeScript development environment";
+        node = {
+          path = ./node;
+          description = "Node.js development environment";
         };
       };
     };

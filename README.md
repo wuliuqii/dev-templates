@@ -24,4 +24,4 @@ nix flake init --template github:wuliuqii/dev-templates#rust
 | wayland-rs | [wayland-rs](./wayland-rs) |
 | gpui       | [gpui](./gpui)             |
 | go         | [go](./go)                 |
-| typescript | [typescript](./typescript) |
+| node       | [node](./node)             |
